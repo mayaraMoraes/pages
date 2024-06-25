@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Documentação de Criação Básica de um Fluxo (Flow)</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h2 {
+            color: #555;
+            margin-top: 20px;
+        }
+
+        h3 {
+            color: #777;
+            margin-top: 15px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        details {
+            margin-top: 10px;
+        }
+
+        details summary {
+            padding: 5px 0;
+        }
+
+        details ul {
+            padding-left: 20px;
+        }
+
+        details ul li {
+            background: #f9f9f9;
+            margin: 5px 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .section-content {
+            margin-bottom: 20px;
+        }
+
+        .section-content ul {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Documentação de Criação Básica de um Fluxo (Flow)</h1>
+
+    <section>
+        <h2 class="section-title">Nome do fluxo</h2>
+        <div class="section-content">
+            <ul>
+                <li>Nome: Flow name</li>
+                <li>Tipo: text placeholder</li>
+                <li>Obrigatório: sim</li>
+                <li>Editável: sim</li>
+                <li>Preenchimento: manual (pelo usuário)</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Descrição do fluxo</h2>
+        <div class="section-content">
+            <ul>
+                <li>Nome: Description</li>
+                <li>Tipo: text placeholder</li>
+                <li>Obrigatório: não</li>
+                <li>Editável: sim</li>
+                <li>Preenchimento: manual (pelo usuário)</li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Parâmetros de entrada do fluxo</h2>
+        <div class="section-content">
+            <ul>
+                <li>Nome: Inputs (parâmetros de entrada do fluxo)</li>
+                <li>Tipo: lista de itens (parâmetros)</li>
+                <li>Arrastável: não (a ordem não importa)</li>
+                <li>Obrigatório: não</li>
+                <li>Editável: sim</li>
+                <li>Preenchimento: manual (pelo usuário)</li>
+                <li>
+                    <details>
+                        <summary>Para cada item (parâmetro):</summary>
+                        <ul>
+                            <li>
+                                <h3>Nome do parâmetro</h3>
+                                <ul>
+                                    <li>Nome: key</li>
+                                    <li>Tipo: text placeholder</li>
+                                    <li>Obrigatório: sim</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3>Tipo do parâmetro</h3>
+                                <ul>
+                                    <li>Nome: type</li>
+                                    <li>Tipo: seleção (string; number; boolean; list; object; date; null)</li>
+                                    <li>Obrigatório: sim</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3>Novo nome dado ao parâmetro</h3>
+                                <ul>
+                                    <li>Nome: new_key</li>
+                                    <li>Tipo: text placeholder</li>
+                                    <li>Obrigatório: não</li>
+                                    <li>Observação: O usuário deve preencher este campo apenas se desejar renomear o
+                                        parâmetro.
+                                        Por exemplo, se o nome do parâmetro for 'cpf' e o usuário quiser que seja 'CPF',
+                                        ele
+                                        deve preencher este campo com 'CPF'.
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Grupo de funções</h2>
+        <div class="section-content">
+            <ul>
+                <li>Nome: Function group (grupo de funções)</li>
+                <li>Tipo: lista de itens (grupos de funções)</li>
+                <li>Arrastável: não (a ordem não importa)</li>
+                <li>Obrigatório: sim</li>
+                <li>Editável: sim</li>
+                <li>Preenchimento: manual (pelo usuário)</li>
+                <li>
+                    <details>
+                        <summary>Para cada item (grupo de funções):</summary>
+                        <ul>
+                            <li>
+                                <h3>Nome do grupo de funções</h3>
+                                <ul>
+                                    <li>Nome: Group name</li>
+                                    <li>Tipo: text</li>
+                                    <li>Obrigatório: sim</li>
+                                    <li>Editável: não</li>
+                                    <li>Preenchimento: automático</li>
+                                    <li>Observação: O nome do grupo de funções será sempre 'group1', 'group2', 'group3',
+                                        etc.
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3>Funções</h3>
+                                <ul>
+                                    <li>Nome: Functions (funções)</li>
+                                    <li>Tipo: lista de itens (funções)</li>
+                                    <li>Arrastável: sim (as funções podem ser arrastadas para diferentes grupos de
+                                        funções).
+                                    </li>
+                                    <li>Obrigatório: sim</li>
+                                    <li>Editável: sim</li>
+                                    <li>Preenchimento: manual (pelo usuário)</li>
+                                    <li>
+                                        <details>
+                                            <summary>Para cada item (função):</summary>
+                                            <ul>
+                                                <li>
+                                                    <h3>Nome da função</h3>
+                                                    <ul>
+                                                        <li>Nome: Function name</li>
+                                                        <li>Tipo: text placeholder</li>
+                                                        <li>Obrigatório: sim</li>
+                                                        <li>Editável: sim</li>
+                                                        <li>Preenchimento: manual (pelo usuário)</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <h3>Comando Curl da função</h3>
+                                                    <ul>
+                                                        <li>Nome: Command Curl</li>
+                                                        <li>Tipo: text placeholder</li>
+                                                        <li>Obrigatório: sim</li>
+                                                        <li>Editável: sim</li>
+                                                        <li>Preenchimento: manual (pelo usuário)</li>
+                                                        <li>Observação: Após inserir o Comando Curl, os parâmetros de
+                                                            entrada da
+                                                            função (inputs)
+                                                            aparecerão automaticamente.
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <h3>Parâmetros de entrada da função</h3>
+                                                    <ul>
+                                                        <li>Nome: Inputs (parâmetros de entrada da função)</li>
+                                                        <li>Tipo: lista de itens (header, body, query params)</li>
+                                                        <li>Arrastável: não (a ordem não importa)</li>
+                                                        <li>Obrigatório: sim</li>
+                                                        <li>Editável: não</li>
+                                                        <li>Preenchimento: automático (após inserir o Comando Curl)</li>
+                                                        <li>
+                                                            <details>
+                                                                <summary>Para cada item (header, body, query params):
+                                                                </summary>
+                                                                <ul>
+                                                                    <li>
+                                                                        <h3>Nome do parâmetro</h3>
+                                                                        <ul>
+                                                                            <li>Nome: key</li>
+                                                                            <li>Tipo: text</li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                            <li>Editável: não</li>
+                                                                            <li>Preenchimento: automático</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Tipo do parâmetro</h3>
+                                                                        <ul>
+                                                                            <li>Nome: type</li>
+                                                                            <li>Tipo: seleção (string; number; boolean;
+                                                                                list;
+                                                                                object; date; null)
+                                                                            </li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                            <li>Editável: sim</li>
+                                                                            <li>Preenchimento: automático</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Indicador se o parâmetro é obrigatório</h3>
+                                                                        <ul>
+                                                                            <li>Nome: required</li>
+                                                                            <li>Tipo: booleano</li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                            <li>Editável: sim</li>
+                                                                            <li>Preenchimento: manual</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Indicador se o parâmetro é dinâmico</h3>
+                                                                        <ul>
+                                                                            <li>Nome: dynamic</li>
+                                                                            <li>Tipo: booleano</li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                            <li>Editável: sim</li>
+                                                                            <li>Preenchimento: manual</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Valor do parâmetro</h3>
+                                                                        <ul>
+                                                                            <li>Nome: value</li>
+                                                                            <li>
+                                                                                Tipo: placeholder dependendo do type
+                                                                                selecionado
+                                                                                (se não for
+                                                                                dinâmico) / text placeholder com tabela
+                                                                                JSON
+                                                                                Path Finder (se for
+                                                                                dinâmico)
+                                                                            </li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                            <li>Editável: sim</li>
+                                                                            <li>Preenchimento: manual</li>
+                                                                            <li>Observação: Se o parâmetro for marcado
+                                                                                como
+                                                                                dinâmico, o valor será preenchido
+                                                                                selecionando um dos valores disponíveis
+                                                                                na
+                                                                                tabela (tipo tabela JSON Path Finder).
+                                                                                Caso
+                                                                                contrário, o valor será preenchido
+                                                                                manualmente
+                                                                                (tipo placeholder dependendo do type
+                                                                                selecionado).
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </details>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <h3>Parâmetros de saída da função</h3>
+                                                    <ul>
+                                                        <li>Nome: Output (parâmetros de saída da função)</li>
+                                                        <li>Tipo: lista de itens (parâmetros)</li>
+                                                        <li>Arrastável: não (a ordem não importa)</li>
+                                                        <li>Obrigatório: não</li>
+                                                        <li>Editável: sim</li>
+                                                        <li>Preenchimento: automático (executando a função) ou manual
+                                                            (pelo
+                                                            usuário)
+                                                        </li>
+                                                        <li>
+                                                            <details>
+                                                                <summary>Para cada item (parâmetro):</summary>
+                                                                <ul>
+                                                                    <li>
+                                                                        <h3>Nome do parâmetro</h3>
+                                                                        <ul>
+                                                                            <li>Nome: key</li>
+                                                                            <li>Tipo: text placeholder / text</li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                            <li>
+                                                                                <details>
+                                                                                    <summary>Se for escolhido a opção de
+                                                                                        preenchimento manual:
+                                                                                    </summary>
+                                                                                    <ul>
+                                                                                        <li>Editável: sim</li>
+                                                                                        <li>Preenchimento: manual</li>
+                                                                                    </ul>
+                                                                                </details>
+                                                                            </li>
+                                                                            <li>
+                                                                                <details>
+                                                                                    <summary>Se for escolhido a opção de
+                                                                                        preenchimento automático:
+                                                                                    </summary>
+                                                                                    <ul>
+                                                                                        <li>Editável: não</li>
+                                                                                        <li>Preenchimento: automático
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </details>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Tipo do parâmetro</h3>
+                                                                        <ul>
+                                                                            <li>Nome: type</li>
+                                                                            <li>Tipo: seleção (string; number; boolean;
+                                                                                list;
+                                                                                object; date; null)
+                                                                            </li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                            <li>
+                                                                                <details>
+                                                                                    <summary>Se for escolhido a opção de
+                                                                                        preenchimento manual:
+                                                                                    </summary>
+                                                                                    <ul>
+                                                                                        <li>Editável: sim</li>
+                                                                                        <li>Preenchimento: manual</li>
+                                                                                    </ul>
+                                                                                </details>
+                                                                            </li>
+                                                                            <li>
+                                                                                <details>
+                                                                                    <summary>Se for escolhido a opção de
+                                                                                        preenchimento automático:
+                                                                                    </summary>
+                                                                                    <ul>
+                                                                                        <li>Editável: sim</li>
+                                                                                        <li>Preenchimento: automático
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </details>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Novo nome dado ao parâmetro</h3>
+                                                                        <ul>
+                                                                            <li>Nome: new_key</li>
+                                                                            <li>Tipo: text placeholder</li>
+                                                                            <li>Obrigatório: não</li>
+                                                                            <li>Editável: sim</li>
+                                                                            <li>Preenchimento: manual</li>
+                                                                            <li>Observação: O usuário deve preencher
+                                                                                este campo
+                                                                                apenas se desejar
+                                                                                renomear o parâmetro.
+                                                                                Por exemplo, se o nome do parâmetro for
+                                                                                'cpf' e
+                                                                                o usuário quiser que
+                                                                                seja 'CPF', ele
+                                                                                deve preencher este campo com 'CPF'.
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </details>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <h3>Validações após execução da função</h3>
+                                                    <ul>
+                                                        <li>Nome: Post-validations (validações após execução da
+                                                            função)
+                                                        </li>
+                                                        <li>Tipo: lista de itens (validações)</li>
+                                                        <li>
+                                                            Arrastável: sim (as validações podem ser arrastadas para
+                                                            mudar a
+                                                            ordem de prioridade, ou seja, a ordem de execução das
+                                                            validações).
+                                                        </li>
+                                                        <li>Obrigatório: não</li>
+                                                        <li>Editável: sim</li>
+                                                        <li>Preenchimento: manual (pelo usuário)</li>
+                                                        <li>
+                                                            <details>
+                                                                <summary>Para cada item (validação):</summary>
+                                                                <ul>
+                                                                    <li>
+                                                                        <h3>Nome da validação</h3>
+                                                                        <ul>
+                                                                            <li>Nome: Post-validation name</li>
+                                                                            <li>Tipo: text placeholder</li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Condições</h3>
+                                                                        <ul>
+                                                                            <li>Nome: Conditions</li>
+                                                                            <li>Tipo: lista de itens (condições)</li>
+                                                                            <li>
+                                                                                Arrastável: sim (as condições podem ser
+                                                                                arrastadas para mudar a
+                                                                                ordem de prioridade, ou seja, a ordem de
+                                                                                execução das condições).
+                                                                            </li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                            <li>Observação: Em casos de mais de uma
+                                                                                condição,
+                                                                                habilitar a opção de
+                                                                                'E' ou 'OU' (operador lógico indicando
+                                                                                se todas
+                                                                                as condições
+                                                                                devem ser
+                                                                                verdadeiras ou se pelo menos uma delas
+                                                                                deve ser
+                                                                                verdadeira).
+                                                                            </li>
+                                                                            <li>
+                                                                                <details>
+                                                                                    <summary>Para cada item
+                                                                                        (condição):
+                                                                                    </summary>
+                                                                                    <ul>
+                                                                                        <li>
+                                                                                            <h3>Caminho do parâmetro que
+                                                                                                será
+                                                                                                validado</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: path</li>
+                                                                                                <li>Tipo: text
+                                                                                                    placeholder com
+                                                                                                    tabela JSON Path
+                                                                                                    Finder
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <h3>Operador de
+                                                                                                comparação</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: operator</li>
+                                                                                                <li>Tipo: seleção (==;
+                                                                                                    !=; >; <;
+                                                                                                    >=; <=; in; not in)
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <h3>Tipo que deve ter o
+                                                                                                parâmetro</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: type</li>
+                                                                                                <li>Tipo: seleção
+                                                                                                    (string;
+                                                                                                    number; boolean;
+                                                                                                    list;
+                                                                                                    object; date; null)
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <h3>Valor que será
+                                                                                                comparado</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: value</li>
+                                                                                                <li>Tipo: placeholder
+                                                                                                    dependendo
+                                                                                                    do type selecionado
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                                <li>Observação: Não terá
+                                                                                                    este
+                                                                                                    campo, quando o
+                                                                                                    'Tipo
+                                                                                                    que deve ter o
+                                                                                                    parâmetro
+                                                                                                    (type)' selecionado
+                                                                                                    for
+                                                                                                    'null'.
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </details>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Ação caso a validação seja verdadeira</h3>
+                                                                        <ul>
+                                                                            <li>Nome: Action (ação caso a validação seja
+                                                                                verdadeira)
+                                                                            </li>
+                                                                            <li>Tipo: seleção (Parar execução; Continuar
+                                                                                execução)
+                                                                            </li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Retorno caso a validação pare a
+                                                                            execução</h3>
+                                                                        <ul>
+                                                                            <li>Nome: Return on stop (retorno caso a
+                                                                                validação
+                                                                                pare a execução)
+                                                                            </li>
+                                                                            <li>Tipo: lista de itens (parâmetros)</li>
+                                                                            <li>Arrastável: não (a ordem não importa)
+                                                                            </li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                            <li>
+                                                                                <details>
+                                                                                    <summary>Para cada item
+                                                                                        (parâmetro):
+                                                                                    </summary>
+                                                                                    <ul>
+                                                                                        <li>
+                                                                                            <h3>Nome do parâmetro</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: key</li>
+                                                                                                <li>Tipo: text
+                                                                                                    placeholder
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <h3>Tipo do parâmetro</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: type</li>
+                                                                                                <li>Tipo: seleção
+                                                                                                    (string;
+                                                                                                    number; boolean;
+                                                                                                    list;
+                                                                                                    object; date; null)
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <h3>Valor do parâmetro</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: value</li>
+                                                                                                <li>Tipo: placeholder
+                                                                                                    dependendo
+                                                                                                    do type selecionado
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                                <li>Observação: Não terá
+                                                                                                    este
+                                                                                                    campo, quando o
+                                                                                                    'Tipo
+                                                                                                    que deve ter o
+                                                                                                    parâmetro
+                                                                                                    (type)' selecionado
+                                                                                                    for
+                                                                                                    'null'.
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </details>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </details>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <h3>Listas de saída da função que serão filtradas</h3>
+                                                    <ul>
+                                                        <li>Nome: Filtered output lists (listas de saída da função que
+                                                            serão
+                                                            filtradas)
+                                                        </li>
+                                                        <li>Tipo: lista de itens (listas)</li>
+                                                        <li>Arrastável: não (a ordem não importa)</li>
+                                                        <li>Obrigatório: não</li>
+                                                        <li>Editável: sim</li>
+                                                        <li>Preenchimento: manual (pelo usuário)</li>
+                                                        <li>
+                                                            <details>
+                                                                <summary>Para cada item (lista):</summary>
+                                                                <ul>
+                                                                    <li>
+                                                                        <h3>Nome da lista no retorno</h3>
+                                                                        <ul>
+                                                                            <li>Nome: Name</li>
+                                                                            <li>Tipo: text placeholder</li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Caminho da lista que será filtrada</h3>
+                                                                        <ul>
+                                                                            <li>Nome: Path</li>
+                                                                            <li>Tipo: text placeholder com tabela JSON
+                                                                                Path Finder
+                                                                            </li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Quantidade de itens que serão selecionados
+                                                                            da lista</h3>
+                                                                        <ul>
+                                                                            <li>Nome: Number of items</li>
+                                                                            <li>Tipo: number placeholder</li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Lista de itens que serão selecionados da
+                                                                            lista</h3>
+                                                                        <ul>
+                                                                            <li>Nome: Itens</li>
+                                                                            <li>Tipo: lista de itens (item)</li>
+                                                                            <li>
+                                                                                Arrastável: sim (os itens podem ser
+                                                                                arrastados
+                                                                                para mudar a ordem de prioridade, ou
+                                                                                seja, a ordem
+                                                                                de itens que serão selecionados).
+                                                                            </li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                            <li>
+                                                                                <details>
+                                                                                    <summary>Para cada item (item):
+                                                                                    </summary>
+                                                                                    <ul>
+                                                                                        <li>
+                                                                                            <h3>Nome do item</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: Name</li>
+                                                                                                <li>Tipo: text
+                                                                                                    placeholder
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <h3>Caminho do parâmetro que
+                                                                                                será
+                                                                                                validado</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: path</li>
+                                                                                                <li>Tipo: text
+                                                                                                    placeholder com
+                                                                                                    tabela JSON Path
+                                                                                                    Finder
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <h3>Tipo que deve ter o
+                                                                                                parâmetro</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: type</li>
+                                                                                                <li>Tipo: seleção
+                                                                                                    (string;
+                                                                                                    number; boolean;
+                                                                                                    list;
+                                                                                                    object; date)
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <h3>Valor que deve ter o
+                                                                                                parâmetro</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: value</li>
+                                                                                                <li>Tipo: placeholder
+                                                                                                    dependendo
+                                                                                                    do type selecionado
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <h3>Lista de regras que
+                                                                                                devem ser
+                                                                                                verdadeiras para que o
+                                                                                                item seja
+                                                                                                selecionado</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: Rules (regras
+                                                                                                    que
+                                                                                                    devem ser
+                                                                                                    verdadeiras)
+                                                                                                </li>
+                                                                                                <li>Tipo: lista de itens
+                                                                                                    (regra)
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    Arrastável: sim (as
+                                                                                                    regras
+                                                                                                    podem ser arrastadas
+                                                                                                    para
+                                                                                                    mudar a ordem de
+                                                                                                    prioridade,
+                                                                                                    ou seja, a ordem de
+                                                                                                    execução
+                                                                                                    das regras).
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                                <li>
+                                                                                                    <details>
+                                                                                                        <summary>Para
+                                                                                                            cada item
+                                                                                                            (regra):
+                                                                                                        </summary>
+                                                                                                        <ul>
+                                                                                                            <li>
+                                                                                                                <h3>Nome
+                                                                                                                    da
+                                                                                                                    regra</h3>
+                                                                                                                <ul>
+                                                                                                                    <li>
+                                                                                                                        Nome:
+                                                                                                                        Rule
+                                                                                                                        name
+                                                                                                                    </li>
+                                                                                                                    <li>
+                                                                                                                        Tipo:
+                                                                                                                        text
+                                                                                                                        placeholder
+                                                                                                                    </li>
+                                                                                                                    <li>
+                                                                                                                        Obrigatório:
+                                                                                                                        sim
+                                                                                                                    </li>
+                                                                                                                </ul>
+                                                                                                            </li>
+                                                                                                            <li>
+                                                                                                                <h3>
+                                                                                                                    Condições</h3>
+                                                                                                                <ul>
+                                                                                                                    <li>
+                                                                                                                        Nome:
+                                                                                                                        Conditions
+                                                                                                                    </li>
+                                                                                                                    <li>
+                                                                                                                        Tipo:
+                                                                                                                        lista
+                                                                                                                        de
+                                                                                                                        itens
+                                                                                                                        (condições)
+                                                                                                                    </li>
+                                                                                                                    <li>
+                                                                                                                        Arrastável:
+                                                                                                                        sim
+                                                                                                                        (as
+                                                                                                                        condições
+                                                                                                                        podem
+                                                                                                                        ser
+                                                                                                                        arrastadas
+                                                                                                                        para
+                                                                                                                        mudar
+                                                                                                                        a
+                                                                                                                        ordem
+                                                                                                                        de
+                                                                                                                        prioridade,
+                                                                                                                        ou
+                                                                                                                        seja,
+                                                                                                                        a
+                                                                                                                        ordem
+                                                                                                                        de
+                                                                                                                        execução
+                                                                                                                        das
+                                                                                                                        condições).
+                                                                                                                    </li>
+                                                                                                                    <li>
+                                                                                                                        Obrigatório:
+                                                                                                                        sim
+                                                                                                                    </li>
+                                                                                                                    <li>
+                                                                                                                        Observação:
+                                                                                                                        Em
+                                                                                                                        casos
+                                                                                                                        de
+                                                                                                                        mais
+                                                                                                                        de
+                                                                                                                        uma
+                                                                                                                        condição,
+                                                                                                                        habilitar
+                                                                                                                        a
+                                                                                                                        opção
+                                                                                                                        de
+                                                                                                                        'E'
+                                                                                                                        ou
+                                                                                                                        'OU'
+                                                                                                                        (operador
+                                                                                                                        lógico
+                                                                                                                        indicando
+                                                                                                                        se
+                                                                                                                        todas
+                                                                                                                        as
+                                                                                                                        condições
+                                                                                                                        devem
+                                                                                                                        ser
+                                                                                                                        verdadeiras
+                                                                                                                        ou
+                                                                                                                        se
+                                                                                                                        pelo
+                                                                                                                        menos
+                                                                                                                        uma
+                                                                                                                        delas
+                                                                                                                        deve
+                                                                                                                        ser
+                                                                                                                        verdadeira).
+                                                                                                                    </li>
+                                                                                                                    <li>
+                                                                                                                        <details>
+                                                                                                                            <summary>
+                                                                                                                                Para
+                                                                                                                                cada
+                                                                                                                                item
+                                                                                                                                (condição):
+                                                                                                                            </summary>
+                                                                                                                            <ul>
+                                                                                                                                <li>
+                                                                                                                                    <h3>
+                                                                                                                                        Caminho
+                                                                                                                                        do
+                                                                                                                                        parâmetro
+                                                                                                                                        que
+                                                                                                                                        será
+                                                                                                                                        validado</h3>
+                                                                                                                                    <ul>
+                                                                                                                                        <li>
+                                                                                                                                            Nome:
+                                                                                                                                            path
+                                                                                                                                        </li>
+                                                                                                                                        <li>
+                                                                                                                                            Tipo:
+                                                                                                                                            text
+                                                                                                                                            placeholder
+                                                                                                                                            com
+                                                                                                                                            tabela
+                                                                                                                                            JSON
+                                                                                                                                            Path
+                                                                                                                                            Finder
+                                                                                                                                        </li>
+                                                                                                                                        <li>
+                                                                                                                                            Obrigatório:
+                                                                                                                                            sim
+                                                                                                                                        </li>
+                                                                                                                                    </ul>
+                                                                                                                                </li>
+                                                                                                                                <li>
+                                                                                                                                    <h3>
+                                                                                                                                        Operador
+                                                                                                                                        de
+                                                                                                                                        comparação</h3>
+                                                                                                                                    <ul>
+                                                                                                                                        <li>
+                                                                                                                                            Nome:
+                                                                                                                                            operator
+                                                                                                                                        </li>
+                                                                                                                                        <li>
+                                                                                                                                            Tipo:
+                                                                                                                                            seleção
+                                                                                                                                            (==;
+                                                                                                                                            !=;
+                                                                                                                                            >;
+                                                                                                                                            <;
+                                                                                                                                            >=;
+                                                                                                                                            <=;
+                                                                                                                                            in;
+                                                                                                                                            not
+                                                                                                                                            in)
+                                                                                                                                        </li>
+                                                                                                                                        <li>
+                                                                                                                                            Obrigatório:
+                                                                                                                                            sim
+                                                                                                                                        </li>
+                                                                                                                                    </ul>
+                                                                                                                                </li>
+                                                                                                                                <li>
+                                                                                                                                    <h3>
+                                                                                                                                        Tipo
+                                                                                                                                        que
+                                                                                                                                        deve
+                                                                                                                                        ter
+                                                                                                                                        o
+                                                                                                                                        parâmetro</h3>
+                                                                                                                                    <ul>
+                                                                                                                                        <li>
+                                                                                                                                            Nome:
+                                                                                                                                            type
+                                                                                                                                        </li>
+                                                                                                                                        <li>
+                                                                                                                                            Tipo:
+                                                                                                                                            seleção
+                                                                                                                                            (string;
+                                                                                                                                            number;
+                                                                                                                                            boolean;
+                                                                                                                                            list;
+                                                                                                                                            object;
+                                                                                                                                            date;
+                                                                                                                                            null)
+                                                                                                                                        </li>
+                                                                                                                                        <li>
+                                                                                                                                            Obrigatório:
+                                                                                                                                            sim
+                                                                                                                                        </li>
+                                                                                                                                    </ul>
+                                                                                                                                </li>
+                                                                                                                                <li>
+                                                                                                                                    <h3>
+                                                                                                                                        Valor
+                                                                                                                                        que
+                                                                                                                                        será
+                                                                                                                                        comparado</h3>
+                                                                                                                                    <ul>
+                                                                                                                                        <li>
+                                                                                                                                            Nome:
+                                                                                                                                            value
+                                                                                                                                        </li>
+                                                                                                                                        <li>
+                                                                                                                                            Tipo:
+                                                                                                                                            placeholder
+                                                                                                                                            dependendo
+                                                                                                                                            do
+                                                                                                                                            type
+                                                                                                                                            selecionado
+                                                                                                                                        </li>
+                                                                                                                                        <li>
+                                                                                                                                            Obrigatório:
+                                                                                                                                            sim
+                                                                                                                                        </li>
+                                                                                                                                        <li>
+                                                                                                                                            Observação:
+                                                                                                                                            Não
+                                                                                                                                            terá
+                                                                                                                                            este
+                                                                                                                                            campo,
+                                                                                                                                            quando
+                                                                                                                                            o
+                                                                                                                                            'Tipo
+                                                                                                                                            que
+                                                                                                                                            deve
+                                                                                                                                            ter
+                                                                                                                                            o
+                                                                                                                                            parâmetro
+                                                                                                                                            (type)'
+                                                                                                                                            selecionado
+                                                                                                                                            for
+                                                                                                                                            'null'.
+                                                                                                                                        </li>
+                                                                                                                                    </ul>
+                                                                                                                                </li>
+                                                                                                                            </ul>
+                                                                                                                        </details>
+                                                                                                                    </li>
+                                                                                                                </ul>
+                                                                                                            </li>
+                                                                                                        </ul>
+                                                                                                    </details>
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </details>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                    <li>
+                                                                        <h3>Retorno caso não seja possível selecionar
+                                                                            nenhum
+                                                                            item da lista</h3>
+                                                                        <ul>
+                                                                            <li>Nome: Return on empty (retorno caso não
+                                                                                seja
+                                                                                possível selecionar
+                                                                                nenhum item da lista)
+                                                                            </li>
+                                                                            <li>Tipo: lista de itens (parâmetros)</li>
+                                                                            <li>Arrastável: não (a ordem não importa)
+                                                                            </li>
+                                                                            <li>Obrigatório: sim</li>
+                                                                            <li>
+                                                                                <details>
+                                                                                    <summary>Para cada item
+                                                                                        (parâmetro):
+                                                                                    </summary>
+                                                                                    <ul>
+                                                                                        <li>
+                                                                                            <h3>Nome do parâmetro</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: key</li>
+                                                                                                <li>Tipo: text
+                                                                                                    placeholder
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <h3>Tipo do parâmetro</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: type</li>
+                                                                                                <li>Tipo: seleção
+                                                                                                    (string;
+                                                                                                    number; boolean;
+                                                                                                    list;
+                                                                                                    object; date; null)
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                        <li>
+                                                                                            <h3>Valor do parâmetro</h3>
+                                                                                            <ul>
+                                                                                                <li>Nome: value</li>
+                                                                                                <li>Tipo: placeholder
+                                                                                                    dependendo
+                                                                                                    do type selecionado
+                                                                                                </li>
+                                                                                                <li>Obrigatório: sim
+                                                                                                </li>
+                                                                                                <li>Observação: Não terá
+                                                                                                    este
+                                                                                                    campo, quando o
+                                                                                                    'Tipo
+                                                                                                    que deve ter o
+                                                                                                    parâmetro
+                                                                                                    (type)' selecionado
+                                                                                                    for
+                                                                                                    'null'.
+                                                                                                </li>
+                                                                                            </ul>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </details>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </li>
+                                                                </ul>
+                                                            </details>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </details>
+                                    </li>
+
+                                </ul>
+                            </li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Validações antes da execução do fluxo</h2>
+        <div class="section-content">
+            <ul>
+                <li>Nome: Pre-validations (validações antes da execução do fluxo)</li>
+                <li>Tipo: lista de itens (validações)</li>
+                <li>
+                    Arrastável: sim (as validações podem ser arrastadas para mudar a ordem de prioridade, ou seja, a
+                    ordem de
+                    execução das validações).
+                </li>
+                <li>Obrigatório: não</li>
+                <li>Editável: sim</li>
+                <li>Preenchimento: manual (pelo usuário)</li>
+                <li>
+                    <details>
+                        <summary>Para cada item (validação):</summary>
+                        <ul>
+                            <li>
+                                <h3>Nome da validação</h3>
+                                <ul>
+                                    <li>Nome: Pre-validation name</li>
+                                    <li>Tipo: text placeholder</li>
+                                    <li>Obrigatório: sim</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3>Condições</h3>
+                                <ul>
+                                    <li>Nome: Conditions</li>
+                                    <li>Tipo: lista de itens (condições)</li>
+                                    <li>
+                                        Arrastável: sim (as condições podem ser arrastadas para mudar a ordem de
+                                        prioridade, ou
+                                        seja, a ordem de execução das condições).
+                                    </li>
+                                    <li>Obrigatório: sim</li>
+                                    <li>Observação: Em casos de mais de uma condição, habilitar a opção de
+                                        'E' ou 'OU' (operador lógico indicando se todas as condições
+                                        devem ser
+                                        verdadeiras ou se pelo menos uma delas deve ser verdadeira).
+                                    </li>
+                                    <li>
+                                        <details>
+                                            <summary>Para cada item (condição):</summary>
+                                            <ul>
+                                                <li>
+                                                    <h3>Caminho do parâmetro que será validado</h3>
+                                                    <ul>
+                                                        <li>Nome: path</li>
+                                                        <li>Tipo: text placeholder com tabela JSON Path Finder</li>
+                                                        <li>Obrigatório: sim</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <h3>Operador de comparação</h3>
+                                                    <ul>
+                                                        <li>Nome: operator</li>
+                                                        <li>Tipo: seleção (==; !=; >; <; >=; <=; in; not in)</li>
+                                                        <li>Obrigatório: sim</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <h3>Tipo que deve ter o parâmetro</h3>
+                                                    <ul>
+                                                        <li>Nome: type</li>
+                                                        <li>Tipo: seleção (string; number; boolean; list; object; date;
+                                                            null)
+                                                        </li>
+                                                        <li>Obrigatório: sim</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <h3>Valor que será comparado</h3>
+                                                    <ul>
+                                                        <li>Nome: value</li>
+                                                        <li>Tipo: placeholder dependendo do type selecionado</li>
+                                                        <li>Obrigatório: sim</li>
+                                                        <li>Observação: Não terá este campo, quando o 'Tipo que deve ter
+                                                            o
+                                                            parâmetro (type)' selecionado for 'null'.
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </details>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3>Ação caso a validação seja verdadeira</h3>
+                                <ul>
+                                    <li>Nome: Action (ação caso a validação seja verdadeira)</li>
+                                    <li>Tipo: seleção (Parar execução; Continuar execução)</li>
+                                    <li>Obrigatório: sim</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3>Retorno caso a validação pare a execução</h3>
+                                <ul>
+                                    <li>Nome: Return on stop (retorno caso a validação pare a execução)</li>
+                                    <li>Tipo: lista de itens (parâmetros)</li>
+                                    <li>Arrastável: não (a ordem não importa)</li>
+                                    <li>Obrigatório: sim</li>
+                                    <li>
+                                        <details>
+                                            <summary>Para cada item (parâmetro):</summary>
+                                            <ul>
+                                                <li>
+                                                    <h3>Nome do parâmetro</h3>
+                                                    <ul>
+                                                        <li>Nome: key</li>
+                                                        <li>Tipo: text placeholder</li>
+                                                        <li>Obrigatório: sim</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <h3>Tipo do parâmetro</h3>
+                                                    <ul>
+                                                        <li>Nome: type</li>
+                                                        <li>Tipo: seleção (string; number; boolean; list; object; date;
+                                                            null)
+                                                        </li>
+                                                        <li>Obrigatório: sim</li>
+                                                    </ul>
+                                                </li>
+                                                <li>
+                                                    <h3>Valor do parâmetro</h3>
+                                                    <ul>
+                                                        <li>Nome: value</li>
+                                                        <li>Tipo: placeholder dependendo do type selecionado</li>
+                                                        <li>Obrigatório: sim</li>
+                                                        <li>Observação: Não terá este campo, quando o 'Tipo que deve ter
+
+                                                            o
+                                                            parâmetro (type)' selecionado for 'null'.
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </details>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="section-title">Parâmetros de saída do fluxo</h2>
+        <div class="section-content">
+            <ul>
+                <li>Nome: Output (parâmetros de saída do fluxo)</li>
+                <li>Tipo: lista de itens (parâmetros)</li>
+                <li>Arrastável: não (a ordem não importa)</li>
+                <li>Obrigatório: não</li>
+                <li>Editável: sim</li>
+                <li>Preenchimento: manual (pelo usuário)</li>
+                <li>
+                    <details>
+                        <summary>Para cada item (parâmetro):</summary>
+                        <ul>
+                            <li>
+                                <h3>Nome do parâmetro</h3>
+                                <ul>
+                                    <li>Nome: key</li>
+                                    <li>Tipo: text placeholder</li>
+                                    <li>Obrigatório: sim</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3>Valor do parâmetro</h3>
+                                <ul>
+                                    <li>Nome: value</li>
+                                    <li>Tipo: text placeholder com tabela JSON Path Finder</li>
+                                    <li>Obrigatório: sim</li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3>Indicador se o parâmetro é obrigatório</h3>
+                                <ul>
+                                    <li>Nome: required</li>
+                                    <li>Tipo: booleano</li>
+                                    <li>Obrigatório: sim</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </details>
+                </li>
+            </ul>
+        </div>
+    </section>
+</div>
+
+</body>
+</html>

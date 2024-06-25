@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Busca de Memórias da Ires</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+        }
+        header {
+            background: #333;
+            color: #fff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #77aaff 3px solid;
+        }
+        header a {
+            color: #fff;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 16px;
+        }
+        header li {
+            float: left;
+            display: inline;
+            padding: 0 20px 0 20px;
+        }
+        header #branding {
+            float: left;
+        }
+        header #branding h1 {
+            margin: 0;
+        }
+        header nav {
+            float: right;
+            margin-top: 10px;
+        }
+        .content {
+            padding: 20px;
+            background: #fff;
+            margin-top: 20px;
+        }
+        .content h1, .content h2 {
+            color: #333;
+        }
+        .content code {
+            background: #e4e4e4;
+            display: block;
+            padding: 10px;
+            margin-top: 10px;
+            border-left: 3px solid #77aaff;
+            white-space: pre;
+        }
+        .copy-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 5px 10px;
+            background-color: #77aaff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+    <script>
+        function copyToClipboard(elementId) {
+            var copyText = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(copyText).then(function() {
+                alert("Filtro copiado para a área de transferência");
+            }, function(err) {
+                alert("Erro ao copiar o filtro: ", err);
+            });
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>Busca de Memórias da Ires</h1>
+            </div>
+            <nav>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container content">
+        <h1>Busca das MEMORIAS DE PROMTPS FIXOS</h1>
+        <p>Busca memórias de <strong>orientação</strong> e <strong>informações</strong> fixas (não relacionadas a mensagens do cliente).</p>
+        <ul>
+            <li>Quantidade de memórias: 4</li>
+            <li>Filtro na coleção memory_availableForUse:</li>
+        </ul>
+        <code id="filtro1">
+{
+    "$or": [
+        {
+            "filter.organization": "AIRES",
+            "filter.type": "PROMPT",
+            "filter.category": "ORIENTACAO_COMO_ATUAR"
+        },
+        {
+            "filter.organization": "AIRES",
+            "filter.type": "INFORMATION",
+            "filter.category": "INFORMACOES_STATUS",
+            "filter.status": [
+                "EM_SIMULACAO",
+                "EM_ACOMPANHAMENTO",
+                "ENCERRADA"
+            ]
+        },
+        {
+            "filter.organization": "AIRES",
+            "filter.type": "INFORMATION",
+            "filter.category": "INFORMACOES_TIPOS_PRODUTOS"
+        },
+        {
+            "filter.organization": "AIRES",
+            "filter.type": "PROMPT",
+            "filter.category": "ORIENTACAO_CONTEXTUAL"
+        }
+    ],
+    "active": true
+}
+        </code>
+        <button class="copy-btn" onclick="copyToClipboard('filtro1')">Copiar Filtro</button>
+
+        <h1>Busca das MEMORIAS RELACIONADAS AS ULTIMAS MENSAGENS DO CLIENTE</h1>
+        <p>Busca memórias de <strong>informações</strong> e <strong>tutoriais</strong> relacionados às últimas mensagens do cliente.</p>
+
+        <h2>Busca de Informações</h2>
+        <ul>
+            <li>Quantidade máxima de memórias: 3</li>
+            <li>Score mínimo: 0.9</li>
+            <li>Filtro na coleção memory_availableForUse:</li>
+        </ul>
+        <code id="filtro2">
+{
+    "filter.organization": "AIRES",
+    "filter.type": "INFORMATION",
+    "filter.category": "INFORMACOES",
+    "active": true
+}
+        </code>
+        <button class="copy-btn" onclick="copyToClipboard('filtro2')">Copiar Filtro</button>
+
+        <h2>Busca de Tutoriais</h2>
+        <ul>
+            <li>Quantidade máxima de memórias: 2</li>
+            <li>Score mínimo: 0.91</li>
+            <li>Filtro na coleção memory_availableForUse:</li>
+        </ul>
+        <code id="filtro3">
+{
+    "filter.organization": "AIRES",
+    "filter.type": "INFORMATION",
+    "filter.category": "TUTORIAL",
+    "active": true
+}
+        </code>
+        <button class="copy-btn" onclick="copyToClipboard('filtro3')">Copiar Filtro</button>
+
+        <h1>Busca de MEMORIAS RELACIONADAS AS PROPOSTAS DO CLIENTE</h1>
+        <p>Busca memórias de <strong>informações</strong> sobre status das propostas do cliente relacionadas às últimas mensagens do cliente.</p>
+        <ul>
+            <li>Quantidade máxima de memórias: 5</li>
+            <li>Score mínimo: 0.8</li>
+            <li>Filtro na coleção memory_availableForUse:</li>
+        </ul>
+        <code id="filtro4">
+{
+    "filter.organization": "AIRES",
+    "filter.type": "INFORMATION",
+    "filter.category": "INFORMACOES_STATUS",
+    "filter.status": [$statusProposta],
+    "filter.situacao": [$situacaoProposta],
+    "filter.codBanco": [$codBancoProposta],
+    "active": true
+}
+        </code>
+        <button class="copy-btn" onclick="copyToClipboard('filtro4')">Copiar Filtro</button>
+    </div>
+</body>
+</html>
