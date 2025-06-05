@@ -73,7 +73,12 @@ function initializeEventListeners() {
     document.getElementById('formatBtn').addEventListener('click', formatCode);
     
     // Botão atualizar preview
-    document.getElementById('refreshBtn').addEventListener('click', updatePreview);
+document.getElementById('refreshBtn').addEventListener('click', function() {
+    forceRefreshPreview();
+});
+    
+    // Botão debug
+    document.getElementById('debugBtn').addEventListener('click', debugPreview);
     
     // Botão nova aba
     document.getElementById('openNewTabBtn').addEventListener('click', openInNewTab);
@@ -196,22 +201,35 @@ function updatePreview() {
     const previewFrame = document.getElementById('preview');
     
     try {
-        // Método mais confiável: usar srcdoc ao invés de blob URLs
-        previewFrame.srcdoc = htmlCode;
+        // Limpar conteúdo anterior
+        previewFrame.srcdoc = '';
+        previewFrame.src = 'about:blank';
         
-        // Fallback para blob URL se srcdoc não funcionar
-        if (!previewFrame.srcdoc) {
-            const blob = new Blob([htmlCode], { type: 'text/html' });
-            const url = URL.createObjectURL(blob);
-            previewFrame.src = url;
+        // Aguardar um momento antes de carregar o novo conteúdo
+        setTimeout(() => {
+            // Método mais confiável: usar srcdoc ao invés de blob URLs
+            previewFrame.srcdoc = htmlCode;
             
-            // Limpar URL anterior para evitar vazamentos de memória
-            setTimeout(() => {
-                URL.revokeObjectURL(url);
-            }, 2000);
-        }
+            // Fallback para blob URL se srcdoc não funcionar
+            if (!previewFrame.srcdoc && htmlCode.trim()) {
+                const blob = new Blob([htmlCode], { type: 'text/html' });
+                const url = URL.createObjectURL(blob);
+                previewFrame.src = url;
+                
+                // Limpar URL anterior para evitar vazamentos de memória
+                setTimeout(() => {
+                    URL.revokeObjectURL(url);
+                }, 2000);
+            }
+            
+            // Forçar redesenho do iframe
+            previewFrame.style.display = 'none';
+            previewFrame.offsetHeight; // Trigger reflow
+            previewFrame.style.display = 'block';
+            
+            showNotification('Preview atualizado!', 'success');
+        }, 100);
         
-        showNotification('Preview atualizado!', 'success');
     } catch (error) {
         console.error('Erro ao atualizar preview:', error);
         showNotification('Erro ao atualizar preview', 'error');
@@ -319,6 +337,54 @@ function openInNewTab() {
     newTab.document.write(htmlCode);
     newTab.document.close();
     showNotification('Página aberta em nova aba!', 'info');
+}
+
+// Refresh forçado do preview
+function forceRefreshPreview() {
+    const previewFrame = document.getElementById('preview');
+    const htmlCode = editor.getValue();
+    
+    // Remover o iframe e recriar para forçar refresh completo
+    const container = previewFrame.parentElement;
+    const newFrame = previewFrame.cloneNode();
+    
+    container.removeChild(previewFrame);
+    container.appendChild(newFrame);
+    
+    // Definir novo ID
+    newFrame.id = 'preview';
+    
+    // Aguardar um momento e então carregar o conteúdo
+    setTimeout(() => {
+        newFrame.srcdoc = htmlCode;
+        showNotification('Preview recarregado completamente!', 'success');
+    }, 100);
+}
+
+// Debug do preview
+function debugPreview() {
+    const previewFrame = document.getElementById('preview');
+    const htmlCode = editor.getValue();
+    
+    console.log('=== DEBUG PREVIEW ===');
+    console.log('HTML Code length:', htmlCode.length);
+    console.log('Preview frame src:', previewFrame.src);
+    console.log('Preview frame srcdoc length:', previewFrame.srcdoc ? previewFrame.srcdoc.length : 'null');
+    console.log('Preview frame dimensions:', {
+        width: previewFrame.offsetWidth,
+        height: previewFrame.offsetHeight,
+        clientWidth: previewFrame.clientWidth,
+        clientHeight: previewFrame.clientHeight
+    });
+    console.log('Preview container dimensions:', {
+        width: previewFrame.parentElement.offsetWidth,
+        height: previewFrame.parentElement.offsetHeight
+    });
+    
+    // Forçar refresh
+    updatePreview();
+    
+    showNotification('Debug info no console! Verifique F12', 'info');
 }
 
 // Sistema de notificações

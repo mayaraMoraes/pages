@@ -215,6 +215,8 @@ header h1 {
     flex: 1;
     background: white;
     overflow: hidden;
+    position: relative;
+    min-height: 400px;
 }
 
 #preview {
@@ -222,6 +224,28 @@ header h1 {
     height: 100%;
     border: none;
     background: white;
+    display: block;
+    transform: scale(1);
+    transform-origin: top left;
+}
+
+/* Estilos específicos para iframe em telas menores */
+@media (max-width: 1400px) {
+    #preview {
+        transform: scale(0.8);
+        transform-origin: top left;
+        width: 125%;
+        height: 125%;
+    }
+}
+
+@media (max-width: 1200px) {
+    #preview {
+        transform: scale(0.7);
+        transform-origin: top left;
+        width: 142.86%;
+        height: 142.86%;
+    }
 }
 
 /* Modal de tela completa */
