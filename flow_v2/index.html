@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editor HTML - Preview Online</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/theme/monokai.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎨 Editor HTML com Preview</h1>
+            <div class="controls">
+                <button id="runBtn" class="btn btn-primary">▶️ Executar</button>
+                <button id="clearBtn" class="btn btn-secondary">🗑️ Limpar</button>
+                <button id="fullscreenBtn" class="btn btn-accent">🔍 Tela Completa</button>
+                <button id="downloadBtn" class="btn btn-info">💾 Download</button>
+            </div>
+        </header>
+
+        <main class="editor-container">
+            <div class="panel editor-panel">
+                <div class="panel-header">
+                    <h3>📝 Editor HTML</h3>
+                    <div class="panel-controls">
+                        <button id="formatBtn" class="btn-small">🎯 Formatar</button>
+                    </div>
+                </div>
+                <div class="code-editor">
+                    <textarea id="htmlEditor" placeholder="Digite seu código HTML aqui..."></textarea>
+                </div>
+            </div>
+
+            <div class="panel preview-panel">
+                <div class="panel-header">
+                    <h3>🌐 Preview</h3>
+                    <div class="panel-controls">
+                        <button id="refreshBtn" class="btn-small">🔄 Atualizar</button>
+                        <button id="openNewTabBtn" class="btn-small">🔗 Nova Aba</button>
+                    </div>
+                </div>
+                <div class="preview-container">
+                    <iframe id="preview" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+            </div>
+        </main>
+
+        <!-- Modal de Tela Completa -->
+        <div id="fullscreenModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>🔍 Preview em Tela Completa</h3>
+                    <button id="closeFullscreenBtn" class="close-btn">&times;</button>
+                </div>
+                <div class="fullscreen-preview">
+                    <iframe id="fullscreenPreview" sandbox="allow-scripts allow-same-origin"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/mode/xml/xml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/edit/closetag.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.2/addon/fold/xml-fold.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/js-beautify/1.14.0/beautify-html.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
