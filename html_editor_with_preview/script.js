@@ -197,42 +197,53 @@ function loadSampleHTML() {
 
 // Atualizar preview
 function updatePreview() {
-    const htmlCode = editor.getValue();
+    const htmlCode = editor.getValue().trim();
     const previewFrame = document.getElementById('preview');
+    const previewContainer = previewFrame.parentElement;
+    
+    if (!htmlCode) {
+        previewFrame.src = 'about:blank';
+        previewContainer.classList.remove('loading');
+        showNotification('Editor vazio', 'info');
+        return;
+    }
     
     try {
-        // Limpar conteúdo anterior
-        previewFrame.srcdoc = '';
-        previewFrame.src = 'about:blank';
+        // Mostrar loading para HTML grande
+        if (htmlCode.length > 30000) {
+            previewContainer.classList.add('loading');
+        }
         
-        // Aguardar um momento antes de carregar o novo conteúdo
-        setTimeout(() => {
-            // Método mais confiável: usar srcdoc ao invés de blob URLs
+        // Para HTML muito grande, usar blob URL é mais confiável
+        if (htmlCode.length > 50000) {
+            const blob = new Blob([htmlCode], { type: 'text/html; charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            
+            previewFrame.onload = function() {
+                previewContainer.classList.remove('loading');
+                setTimeout(() => URL.revokeObjectURL(url), 1000);
+                showNotification('Preview atualizado! (HTML grande)', 'success');
+            };
+            
+            previewFrame.onerror = function() {
+                previewContainer.classList.remove('loading');
+                showNotification('Erro ao carregar preview', 'error');
+            };
+            
+            previewFrame.src = url;
+        } else {
+            // Para HTML menor, usar srcdoc
             previewFrame.srcdoc = htmlCode;
-            
-            // Fallback para blob URL se srcdoc não funcionar
-            if (!previewFrame.srcdoc && htmlCode.trim()) {
-                const blob = new Blob([htmlCode], { type: 'text/html' });
-                const url = URL.createObjectURL(blob);
-                previewFrame.src = url;
-                
-                // Limpar URL anterior para evitar vazamentos de memória
-                setTimeout(() => {
-                    URL.revokeObjectURL(url);
-                }, 2000);
-            }
-            
-            // Forçar redesenho do iframe
-            previewFrame.style.display = 'none';
-            previewFrame.offsetHeight; // Trigger reflow
-            previewFrame.style.display = 'block';
-            
-            showNotification('Preview atualizado!', 'success');
-        }, 100);
+            setTimeout(() => {
+                previewContainer.classList.remove('loading');
+                showNotification('Preview atualizado!', 'success');
+            }, 100);
+        }
         
     } catch (error) {
+        previewContainer.classList.remove('loading');
         console.error('Erro ao atualizar preview:', error);
-        showNotification('Erro ao atualizar preview', 'error');
+        showNotification('Erro ao atualizar preview: ' + error.message, 'error');
     }
 }
 
@@ -342,23 +353,23 @@ function openInNewTab() {
 // Refresh forçado do preview
 function forceRefreshPreview() {
     const previewFrame = document.getElementById('preview');
-    const htmlCode = editor.getValue();
-    
-    // Remover o iframe e recriar para forçar refresh completo
     const container = previewFrame.parentElement;
-    const newFrame = previewFrame.cloneNode();
     
+    // Criar novo iframe com atributos corretos
+    const newFrame = document.createElement('iframe');
+    newFrame.id = 'preview';
+    newFrame.sandbox = 'allow-scripts allow-same-origin allow-forms allow-modals allow-popups';
+    newFrame.style.cssText = 'width: 100%; min-height: 100%; border: none; background: white; display: block; box-sizing: border-box;';
+    
+    // Remover o antigo e adicionar o novo
     container.removeChild(previewFrame);
     container.appendChild(newFrame);
     
-    // Definir novo ID
-    newFrame.id = 'preview';
-    
-    // Aguardar um momento e então carregar o conteúdo
+    // Aguardar e carregar conteúdo
     setTimeout(() => {
-        newFrame.srcdoc = htmlCode;
+        updatePreview();
         showNotification('Preview recarregado completamente!', 'success');
-    }, 100);
+    }, 200);
 }
 
 // Debug do preview
