@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Variable Function - Condition Type</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #1a1a1a;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #ffffff;
+            padding: 20px;
+        }
+
+        .modal-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            padding: 20px 0;
+        }
+
+        .modal {
+            background: #2a2a2a;
+            border-radius: 12px;
+            width: 100%;
+            max-width: 500px;
+            position: relative;
+            border: 1px solid #404040;
+        }
+
+        .modal-header {
+            padding: 20px 24px 16px 24px;
+            border-bottom: 1px solid #404040;
+            position: relative;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            font-size: 12px;
+            color: #888;
+        }
+
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .breadcrumb-arrow {
+            width: 4px;
+            height: 4px;
+            border-right: 1px solid #888;
+            border-top: 1px solid #888;
+            transform: rotate(45deg);
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 16px;
+            right: 20px;
+            background: #5b47ff;
+            border: none;
+            border-radius: 6px;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .modal-body {
+            padding: 24px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #ff4444;
+        }
+
+        .form-input {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            padding: 10px 12px;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #5b47ff;
+        }
+
+        .form-input::placeholder {
+            color: #666;
+        }
+
+        .select-wrapper {
+            position: relative;
+        }
+
+        .form-select {
+            width: 100%;
+            background: #1a1a1a;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            padding: 10px 12px;
+            color: #ffffff;
+            font-size: 14px;
+            appearance: none;
+            cursor: pointer;
+        }
+
+        .form-select:focus {
+            outline: none;
+            border-color: #5b47ff;
+        }
+
+        .select-arrow {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0;
+            height: 0;
+            border-left: 4px solid transparent;
+            border-right: 4px solid transparent;
+            border-top: 4px solid #888;
+            pointer-events: none;
+        }
+
+        .conditions-section {
+            border: 1px solid #404040;
+            border-radius: 8px;
+            padding: 16px;
+            background: #242424;
+        }
+
+        .conditions-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+
+        .conditions-title {
+            font-size: 14px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .add-condition-btn {
+            background: #5b47ff;
+            border: none;
+            border-radius: 6px;
+            padding: 6px 12px;
+            color: #ffffff;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .condition-item {
+            background: #1a1a1a;
+            border: 1px solid #404040;
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .condition-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .condition-number {
+            font-size: 12px;
+            color: #888;
+            font-weight: 500;
+        }
+
+        .condition-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #888;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 4px;
+        }
+
+        .action-btn:hover {
+            color: #ffffff;
+        }
+
+        .condition-row {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 12px;
+            align-items: end;
+            margin-bottom: 12px;
+        }
+
+        .operator-section {
+            margin-bottom: 16px;
+        }
+
+        .operator-group {
+            display: flex;
+            gap: 12px;
+        }
+
+        .radio-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .radio-input {
+            accent-color: #5b47ff;
+        }
+
+        .radio-label {
+            font-size: 14px;
+            color: #ffffff;
+            cursor: pointer;
+        }
+
+        .rules-section {
+            margin-bottom: 16px;
+        }
+
+        .rules-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .rules-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .rule-count {
+            font-size: 12px;
+            color: #888;
+            background: #404040;
+            padding: 2px 8px;
+            border-radius: 4px;
+        }
+
+        .add-rule-btn {
+            background: none;
+            border: 1px solid #404040;
+            border-radius: 4px;
+            padding: 4px 8px;
+            color: #888;
+            font-size: 12px;
+            cursor: pointer;
+        }
+
+        .rule-item {
+            display: grid;
+            grid-template-columns: 1fr 60px 80px 1fr 24px;
+            gap: 8px;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .rule-item:last-child {
+            border-bottom: none;
+        }
+
+        .rule-input {
+            background: #2a2a2a;
+            border: 1px solid #404040;
+            border-radius: 4px;
+            padding: 6px 8px;
+            color: #ffffff;
+            font-size: 12px;
+        }
+
+        .rule-select {
+            background: #2a2a2a;
+            border: 1px solid #404040;
+            border-radius: 4px;
+            padding: 6px 8px;
+            color: #ffffff;
+            font-size: 12px;
+            appearance: none;
+        }
+
+        .return-section {
+            border-top: 1px solid #404040;
+            padding-top: 16px;
+        }
+
+        .return-row {
+            display: grid;
+            grid-template-columns: 80px 1fr 100px;
+            gap: 12px;
+            align-items: end;
+            margin-bottom: 12px;
+        }
+
+        .dynamic-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 40px;
+            height: 20px;
+            background: #404040;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .toggle-switch.active {
+            background: #5b47ff;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 16px;
+            height: 16px;
+            background: #ffffff;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .toggle-switch.active .toggle-slider {
+            transform: translateX(20px);
+        }
+
+        .toggle-label {
+            font-size: 12px;
+            color: #888;
+        }
+
+        .modal-footer {
+            padding: 16px 24px;
+            border-top: 1px solid #404040;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-left {
+            color: #888;
+            font-size: 12px;
+        }
+
+        .save-btn {
+            background: #5b47ff;
+            border: none;
+            border-radius: 6px;
+            padding: 10px 24px;
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .save-btn:hover {
+            background: #4a38cc;
+        }
+
+        .type-indicator {
+            display: inline-block;
+            background: #5b47ff;
+            color: #ffffff;
+            font-size: 10px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+            margin-left: 8px;
+        }
+
+        .small-input {
+            font-size: 11px !important;
+            padding: 4px 6px !important;
+        }
+
+        .condition-divider {
+            border-top: 1px solid #333;
+            margin: 16px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="modal-container">
+        <div class="modal">
+            <div class="modal-header">
+                <div class="breadcrumb">
+                    <div class="breadcrumb-item">
+                        <span>🔧</span>
+                        <span>Flow 1</span>
+                    </div>
+                    <div class="breadcrumb-arrow"></div>
+                    <div class="breadcrumb-item">
+                        <span>⚙️</span>
+                        <span>New function</span>
+                    </div>
+                </div>
+                <h2 class="modal-title">New function</h2>
+                <button class="close-btn">×</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Name <span class="required">*</span></label>
+                    <input type="text" class="form-input" value="determinar_status_usuario" placeholder="Choose a function name">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Type Function <span class="required">*</span></label>
+                    <div class="select-wrapper">
+                        <select class="form-select">
+                            <option value="HTTP_REQUEST">HTTP_REQUEST</option>
+                            <option value="CREATE_VARIABLE" selected>CREATE_VARIABLE</option>
+                            <option value="DATABASE_OPERATION">DATABASE_OPERATION</option>
+                            <option value="MATH_OPERATION">MATH_OPERATION</option>
+                        </select>
+                        <div class="select-arrow"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Variable Type <span class="required">*</span></label>
+                    <div class="select-wrapper">
+                        <select class="form-select">
+                            <option value="FIXED">FIXED</option>
+                            <option value="DYNAMIC">DYNAMIC</option>
+                            <option value="CONDITION" selected>CONDITION</option>
+                        </select>
+                        <div class="select-arrow"></div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Variable Key <span class="required">*</span></label>
+                    <input type="text" class="form-input" value="status_usuario" placeholder="Variable key name">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Conditions <span class="required">*</span></label>
+                    <div class="conditions-section">
+                        <div class="conditions-header">
+                            <span class="conditions-title">Value Conditions (2)</span>
+                            <button class="add-condition-btn">+ add new</button>
+                        </div>
+
+                        <!-- Condition 1 -->
+                        <div class="condition-item">
+                            <div class="condition-header">
+                                <span class="condition-number">Condition 1</span>
+                                <div class="condition-actions">
+                                    <button class="action-btn">▲</button>
+                                    <button class="action-btn">▼</button>
+                                    <button class="action-btn">🗑</button>
+                                </div>
+                            </div>
+
+                            <div class="operator-section">
+                                <div class="operator-group">
+                                    <div class="radio-wrapper">
+                                        <input type="radio" name="operator1" class="radio-input" id="and1" checked>
+                                        <label for="and1" class="radio-label">And</label>
+                                    </div>
+                                    <div class="radio-wrapper">
+                                        <input type="radio" name="operator1" class="radio-input" id="or1">
+                                        <label for="or1" class="radio-label">Or</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rules-section">
+                                <div class="rules-header">
+                                    <span class="rules-title">Rules</span>
+                                    <span class="rule-count">(1)</span>
+                                    <button class="add-rule-btn">+ add new</button>
+                                </div>
+
+                                <div class="rule-item">
+                                    <input type="text" class="rule-input small-input" value="consultar_usuario.output.status" placeholder="key">
+                                    <select class="rule-select small-input">
+                                        <option value="==">=</option>
+                                        <option value="!=">!=</option>
+                                        <option value=">">&gt;</option>
+                                        <option value="<">&lt;</option>
+                                    </select>
+                                    <select class="rule-select small-input">
+                                        <option value="NUMBER" selected>NUM</option>
+                                        <option value="STRING">STR</option>
+                                        <option value="BOOLEAN">BOOL</option>
+                                    </select>
+                                    <input type="text" class="rule-input small-input" value="200" placeholder="value">
+                                    <button class="action-btn">🗑</button>
+                                </div>
+                            </div>
+
+                            <div class="return-section">
+                                <div class="dynamic-toggle">
+                                    <div class="toggle-switch" onclick="toggleSwitch(this)">
+                                        <div class="toggle-slider"></div>
+                                    </div>
+                                    <span class="toggle-label">Dynamic Value</span>
+                                </div>
+
+                                <div class="return-row">
+                                    <div class="select-wrapper">
+                                        <select class="form-select">
+                                            <option value="STRING" selected>STRING</option>
+                                            <option value="NUMBER">NUMBER</option>
+                                            <option value="BOOLEAN">BOOLEAN</option>
+                                            <option value="DATE">DATE</option>
+                                        </select>
+                                        <div class="select-arrow"></div>
+                                    </div>
+                                    <input type="text" class="form-input" value="ativo" placeholder="Return value">
+                                    <span class="type-indicator">FIXED</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Condition 2 -->
+                        <div class="condition-item">
+                            <div class="condition-header">
+                                <span class="condition-number">Condition 2</span>
+                                <div class="condition-actions">
+                                    <button class="action-btn">▲</button>
+                                    <button class="action-btn">▼</button>
+                                    <button class="action-btn">🗑</button>
+                                </div>
+                            </div>
+
+                            <div class="operator-section">
+                                <div class="operator-group">
+                                    <div class="radio-wrapper">
+                                        <input type="radio" name="operator2" class="radio-input" id="and2" checked>
+                                        <label for="and2" class="radio-label">And</label>
+                                    </div>
+                                    <div class="radio-wrapper">
+                                        <input type="radio" name="operator2" class="radio-input" id="or2">
+                                        <label for="or2" class="radio-label">Or</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="rules-section">
+                                <div class="rules-header">
+                                    <span class="rules-title">Rules</span>
+                                    <span class="rule-count">(1)</span>
+                                    <button class="add-rule-btn">+ add new</button>
+                                </div>
+
+                                <div class="rule-item">
+                                    <input type="text" class="rule-input small-input" value="consultar_usuario.output.status" placeholder="key">
+                                    <select class="rule-select small-input">
+                                        <option value="==">=</option>
+                                        <option value="!=" selected>!=</option>
+                                        <option value=">">&gt;</option>
+                                        <option value="<">&lt;</option>
+                                    </select>
+                                    <select class="rule-select small-input">
+                                        <option value="NUMBER" selected>NUM</option>
+                                        <option value="STRING">STR</option>
+                                        <option value="BOOLEAN">BOOL</option>
+                                    </select>
+                                    <input type="text" class="rule-input small-input" value="200" placeholder="value">
+                                    <button class="action-btn">🗑</button>
+                                </div>
+                            </div>
+
+                            <div class="return-section">
+                                <div class="dynamic-toggle">
+                                    <div class="toggle-switch active" onclick="toggleSwitch(this)">
+                                        <div class="toggle-slider"></div>
+                                    </div>
+                                    <span class="toggle-label">Dynamic Value</span>
+                                </div>
+
+                                <div class="return-row">
+                                    <div class="select-wrapper">
+                                        <select class="form-select" disabled>
+                                            <option value="STRING" selected>STRING</option>
+                                        </select>
+                                        <div class="select-arrow"></div>
+                                    </div>
+                                    <input type="text" class="form-input" value="consultar_usuario.output.body.error_message" placeholder="Dynamic path">
+                                    <span class="type-indicator" style="background: #ff6b35;">DYNAMIC</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <div class="footer-left">
+                    Close
+                </div>
+                <button class="save-btn">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleSwitch(element) {
+            element.classList.toggle('active');
+
+            // Find the parent condition item
+            const conditionItem = element.closest('.condition-item');
+            const returnRow = conditionItem.querySelector('.return-row');
+            const typeSelect = returnRow.querySelector('select');
+            const valueInput = returnRow.querySelector('input');
+            const typeIndicator = returnRow.querySelector('.type-indicator');
+
+            if (element.classList.contains('active')) {
+                // Dynamic mode
+                typeSelect.disabled = true;
+                typeSelect.value = 'STRING';
+                valueInput.placeholder = 'Dynamic path';
+                typeIndicator.textContent = 'DYNAMIC';
+                typeIndicator.style.background = '#ff6b35';
+            } else {
+                // Fixed mode
+                typeSelect.disabled = false;
+                valueInput.placeholder = 'Return value';
+                typeIndicator.textContent = 'FIXED';
+                typeIndicator.style.background = '#5b47ff';
+            }
+        }
+
+        // Initialize form interactions
+        document.addEventListener('DOMContentLoaded', function() {
+            const addConditionBtn = document.querySelector('.add-condition-btn');
+            const addRuleBtns = document.querySelectorAll('.add-rule-btn');
+
+            // Add condition functionality (placeholder)
+            addConditionBtn.addEventListener('click', function() {
+                console.log('Add new condition');
+            });
+
+            // Add rule functionality (placeholder)
+            addRuleBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    console.log('Add new rule');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

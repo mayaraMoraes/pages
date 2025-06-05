@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow - Inspirações UI/UX</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #1a1a1a;
+            color: #ffffff;
+            overflow-x: auto;
+        }
+
+        .container {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            min-width: max-content;
+        }
+
+        .screen {
+            background: #2a2a2a;
+            border-radius: 12px;
+            padding: 24px;
+            width: 400px;
+            min-height: 600px;
+            border: 1px solid #333;
+            flex-shrink: 0;
+        }
+
+        .screen-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #8b5cf6;
+            border-bottom: 1px solid #333;
+            padding-bottom: 10px;
+        }
+
+        .section {
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 12px;
+            color: #a0a0a0;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 12px;
+            color: #a0a0a0;
+            margin-bottom: 6px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 12px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 14px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #8b5cf6;
+        }
+
+        .dropdown {
+            width: 100%;
+            padding: 10px 12px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            color: #ffffff;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 12px;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 6px;
+            border: 1px solid #444;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .radio-option.active {
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .radio-option input {
+            display: none;
+        }
+
+        .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .checkbox-item.active {
+            border-color: #8b5cf6;
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .checkbox {
+            width: 16px;
+            height: 16px;
+            border: 2px solid #444;
+            border-radius: 3px;
+            position: relative;
+        }
+
+        .checkbox.checked {
+            background: #8b5cf6;
+            border-color: #8b5cf6;
+        }
+
+        .checkbox.checked::after {
+            content: '✓';
+            position: absolute;
+            top: -2px;
+            left: 2px;
+            color: white;
+            font-size: 12px;
+        }
+
+        .condition-builder {
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 16px;
+        }
+
+        .condition-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 12px;
+            padding: 8px;
+            background: #2a2a2a;
+            border-radius: 4px;
+        }
+
+        .condition-input {
+            flex: 1;
+            padding: 6px 8px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 12px;
+        }
+
+        .operator-select {
+            padding: 6px 8px;
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 12px;
+        }
+
+        .btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .btn-secondary {
+            background: #444;
+            color: white;
+        }
+
+        .btn-add {
+            background: transparent;
+            color: #8b5cf6;
+            border: 1px dashed #8b5cf6;
+        }
+
+        .function-type-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .icon-http { background: rgba(34, 197, 94, 0.2); color: #22c55e; }
+        .icon-variable { background: rgba(251, 191, 36, 0.2); color: #fbbf24; }
+        .icon-database { background: rgba(59, 130, 246, 0.2); color: #3b82f6; }
+        .icon-math { background: rgba(239, 68, 68, 0.2); color: #ef4444; }
+
+        .flow-preview {
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 16px;
+            min-height: 200px;
+        }
+
+        .flow-node {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            margin-bottom: 12px;
+        }
+
+        .flow-connection {
+            height: 2px;
+            background: #8b5cf6;
+            margin: 8px 0;
+            position: relative;
+        }
+
+        .flow-connection.conditional {
+            background: linear-gradient(90deg, #8b5cf6 50%, transparent 50%);
+            background-size: 8px 2px;
+        }
+
+        .flow-connection::after {
+            content: '→';
+            position: absolute;
+            right: -8px;
+            top: -8px;
+            color: #8b5cf6;
+        }
+
+        .tag {
+            padding: 4px 8px;
+            background: rgba(139, 92, 246, 0.2);
+            color: #8b5cf6;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        .variable-preview {
+            background: #1a1a1a;
+            border: 1px solid #444;
+            border-radius: 6px;
+            padding: 12px;
+            margin-top: 12px;
+        }
+
+        .variable-preview code {
+            color: #22c55e;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Tela 1: Configuração de Próximo Grupo -->
+        <div class="screen">
+            <div class="screen-title">⚙️ Configuração do Grupo</div>
+
+            <div class="section">
+                <div class="section-title">Informações Básicas</div>
+                <div class="form-group">
+                    <label class="form-label">Nome do Grupo</label>
+                    <input type="text" class="form-input" value="Validação de Dados" />
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Descrição</label>
+                    <input type="text" class="form-input" placeholder="Descreva o propósito deste grupo..." />
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Próximo Grupo</div>
+                <div class="radio-group">
+                    <div class="radio-option active">
+                        <input type="radio" name="next-type" value="fixed" checked />
+                        <span>Grupo Fixo</span>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" name="next-type" value="conditional" />
+                        <span>Condicional</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <select class="dropdown">
+                        <option>Selecione o próximo grupo...</option>
+                        <option>Grupo 2 - Processamento</option>
+                        <option>Grupo 3 - Validação Final</option>
+                        <option>Grupo 4 - Resposta</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Condições (quando condicional)</div>
+                <div class="condition-builder">
+                    <div class="condition-row">
+                        <input class="condition-input" placeholder="variável" />
+                        <select class="operator-select">
+                            <option>==</option>
+                            <option>!=</option>
+                            <option>&gt;</option>
+                            <option>&lt;</option>
+                        </select>
+                        <input class="condition-input" placeholder="valor" />
+                        <button class="btn btn-secondary">×</button>
+                    </div>
+                    <button class="btn btn-add">+ Adicionar Condição</button>
+                </div>
+            </div>
+
+            <div style="margin-top: auto; padding-top: 20px;">
+                <button class="btn btn-primary" style="width: 100%;">Salvar Configurações</button>
+            </div>
+        </div>
+
+        <!-- Tela 2: Criação de Função CREATE_VARIABLE -->
+        <div class="screen">
+            <div class="screen-title">📝 Nova Função - Criar Variável</div>
+
+            <div class="section">
+                <div class="section-title">Tipo de Função</div>
+                <div class="form-group">
+                    <select class="dropdown">
+                        <option>CREATE_VARIABLE</option>
+                        <option>HTTP_REQUEST</option>
+                        <option>DATABASE_OPERATION</option>
+                        <option>MATH_OPERATION</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Configuração da Variável</div>
+                <div class="form-group">
+                    <label class="form-label">Nome da Variável *</label>
+                    <input type="text" class="form-input" value="user_status" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Tipo de Variável</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <input type="radio" name="var-type" value="fixed" />
+                            <span>FIXED</span>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" name="var-type" value="dynamic" />
+                            <span>DYNAMIC</span>
+                        </div>
+                        <div class="radio-option active">
+                            <input type="radio" name="var-type" value="condition" checked />
+                            <span>CONDITION</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Condições</label>
+                    <div class="condition-builder">
+                        <div class="condition-row">
+                            <input class="condition-input" value="request.age" />
+                            <select class="operator-select">
+                                <option selected>&gt;=</option>
+                            </select>
+                            <input class="condition-input" value="18" />
+                            <button class="btn btn-secondary">×</button>
+                        </div>
+                        <div style="margin: 8px 0; font-size: 12px; color: #a0a0a0;">
+                            Valor se verdadeiro: <strong>"adulto"</strong> | Valor se falso: <strong>"menor"</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Preview</div>
+                <div class="variable-preview">
+                    <code>
+                        user_status = request.age >= 18 ? "adulto" : "menor"
+                    </code>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 20px;">Criar Função</button>
+        </div>
+
+        <!-- Tela 3: Database Operation -->
+        <div class="screen">
+            <div class="screen-title">💾 Nova Função - Operação de Banco</div>
+
+            <div class="section">
+                <div class="section-title">Configuração da Operação</div>
+                <div class="form-group">
+                    <label class="form-label">Tipo de Operação</label>
+                    <div class="radio-group">
+                        <div class="radio-option">
+                            <span>INSERT</span>
+                        </div>
+                        <div class="radio-option active">
+                            <span>UPDATE</span>
+                        </div>
+                        <div class="radio-option">
+                            <span>DELETE</span>
+                        </div>
+                        <div class="radio-option">
+                            <span>GET</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Cluster</label>
+                    <input type="text" class="form-input" value="production-cluster" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Database</label>
+                    <input type="text" class="form-input" value="user_management" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Collection</label>
+                    <input type="text" class="form-input" value="users" />
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Filtros de Update</div>
+                <div class="condition-builder">
+                    <div class="condition-row">
+                        <input class="condition-input" value="_id" />
+                        <select class="operator-select">
+                            <option>==</option>
+                        </select>
+                        <input class="condition-input" value="{{user_id}}" />
+                        <button class="btn btn-secondary">×</button>
+                    </div>
+                    <button class="btn btn-add">+ Adicionar Filtro</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Dados para Update</div>
+                <div class="condition-builder">
+                    <div class="condition-row">
+                        <input class="condition-input" placeholder="campo" value="last_login" />
+                        <span style="color: #a0a0a0; padding: 0 8px;">:</span>
+                        <input class="condition-input" placeholder="valor" value="{{current_timestamp}}" />
+                        <button class="btn btn-secondary">×</button>
+                    </div>
+                    <div class="condition-row">
+                        <input class="condition-input" placeholder="campo" value="status" />
+                        <span style="color: #a0a0a0; padding: 0 8px;">:</span>
+                        <input class="condition-input" placeholder="valor" value="active" />
+                        <button class="btn btn-secondary">×</button>
+                    </div>
+                    <button class="btn btn-add">+ Adicionar Campo</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Preview da Query</div>
+                <div class="variable-preview">
+                    <code style="font-size: 11px; line-height: 1.4;">
+                        db.users.updateOne(<br/>
+                        &nbsp;&nbsp;{ "_id": "{{user_id}}" },<br/>
+                        &nbsp;&nbsp;{ "$set": {<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"last_login": "{{current_timestamp}}",<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;"status": "active"<br/>
+                        &nbsp;&nbsp;} }<br/>
+                        )
+                    </code>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 20px;">Criar Função</button>
+        </div>
+
+        <!-- Tela 4: Visualização do Flow com Novos Tipos -->
+        <div class="screen">
+            <div class="screen-title">🔄 Visualização do Flow</div>
+
+            <div class="section">
+                <div class="section-title">Grupo 1 - Entrada</div>
+                <div class="flow-node">
+                    <div class="function-type-icon icon-http">🌐</div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 500;">Receber Dados</div>
+                        <div style="font-size: 12px; color: #a0a0a0;">HTTP_REQUEST</div>
+                    </div>
+                    <div class="tag">GET</div>
+                </div>
+
+                <div class="flow-node">
+                    <div class="function-type-icon icon-variable">📝</div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 500;">Criar user_status</div>
+                        <div style="font-size: 12px; color: #a0a0a0;">CREATE_VARIABLE</div>
+                    </div>
+                    <div class="tag">CONDITION</div>
+                </div>
+            </div>
+
+            <div class="flow-connection conditional"></div>
+
+            <div class="section">
+                <div class="section-title">Grupo 2 - Processamento (Condicional)</div>
+                <div style="font-size: 12px; color: #fbbf24; margin-bottom: 12px;">
+                    ⚠️ Executado apenas se: user_status == "adulto"
+                </div>
+
+                <div class="flow-node">
+                    <div class="function-type-icon icon-database">💾</div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 500;">Atualizar Usuário</div>
+                        <div style="font-size: 12px; color: #a0a0a0;">DATABASE_OPERATION</div>
+                    </div>
+                    <div class="tag">UPDATE</div>
+                </div>
+
+                <div class="flow-node">
+                    <div class="function-type-icon icon-math">🔢</div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 500;">Calcular Score</div>
+                        <div style="font-size: 12px; color: #a0a0a0;">MATH_OPERATION</div>
+                    </div>
+                    <div class="tag">SUM</div>
+                </div>
+            </div>
+
+            <div class="flow-connection"></div>
+
+            <div class="section">
+                <div class="section-title">Grupo 3 - Resposta</div>
+                <div class="flow-node">
+                    <div class="function-type-icon icon-http">🌐</div>
+                    <div style="flex: 1;">
+                        <div style="font-size: 14px; font-weight: 500;">Enviar Resposta</div>
+                        <div style="font-size: 12px; color: #a0a0a0;">HTTP_REQUEST</div>
+                    </div>
+                    <div class="tag">POST</div>
+                </div>
+            </div>
+
+            <div style="margin-top: 24px; padding: 12px; background: rgba(139, 92, 246, 0.1); border-radius: 6px; border: 1px solid #8b5cf6;">
+                <div style="font-size: 12px; color: #8b5cf6; font-weight: 500;">💡 Legenda</div>
+                <div style="font-size: 11px; color: #a0a0a0; margin-top: 4px;">
+                    Linha sólida = Fluxo fixo<br/>
+                    Linha tracejada = Fluxo condicional
+                </div>
+            </div>
+        </div>
+
+        <!-- Tela 5: Math Operation -->
+        <div class="screen">
+            <div class="screen-title">🔢 Nova Função - Operação Matemática</div>
+
+            <div class="section">
+                <div class="section-title">Configuração da Operação</div>
+                <div class="form-group">
+                    <label class="form-label">Tipo de Operação</label>
+                    <div class="radio-group">
+                        <div class="radio-option active">
+                            <span>SUM</span>
+                        </div>
+                        <div class="radio-option">
+                            <span>SUB</span>
+                        </div>
+                        <div class="radio-option">
+                            <span>MUL</span>
+                        </div>
+                        <div class="radio-option">
+                            <span>DIV</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Nome da Variável Resultado</label>
+                    <input type="text" class="form-input" value="total_score" />
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Valores para Operação</div>
+                <div class="condition-builder">
+                    <div class="condition-row">
+                        <select class="condition-input">
+                            <option>Valor Fixo</option>
+                            <option selected>Referência</option>
+                        </select>
+                        <input class="condition-input" value="{{user.base_score}}" />
+                        <button class="btn btn-secondary">×</button>
+                    </div>
+                    <div class="condition-row">
+                        <select class="condition-input">
+                            <option selected>Valor Fixo</option>
+                            <option>Referência</option>
+                        </select>
+                        <input class="condition-input" value="50" />
+                        <button class="btn btn-secondary">×</button>
+                    </div>
+                    <div class="condition-row">
+                        <select class="condition-input">
+                            <option>Valor Fixo</option>
+                            <option selected>Referência</option>
+                        </select>
+                        <input class="condition-input" value="{{bonus_points}}" />
+                        <button class="btn btn-secondary">×</button>
+                    </div>
+                    <button class="btn btn-add">+ Adicionar Valor</button>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Pré-visualização da Fórmula</div>
+                <div class="variable-preview">
+                    <div style="font-size: 14px; color: #fbbf24; margin-bottom: 8px;">Fórmula:</div>
+                    <code>
+                        total_score = {{user.base_score}} + 50 + {{bonus_points}}
+                    </code>
+                    <div style="margin-top: 12px; font-size: 12px; color: #a0a0a0;">
+                        Exemplo com valores: <code style="color: #22c55e;">total_score = 85 + 50 + 15 = 150</code>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Configurações Avançadas</div>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <div class="checkbox checked"></div>
+                        <span>Validar valores antes da operação</span>
+                    </div>
+                    <div class="checkbox-item active">
+                        <div class="checkbox"></div>
+                        <span>Arredondar resultado para 2 casas decimais</span>
+                    </div>
+                    <div class="checkbox-item">
+                        <div class="checkbox"></div>
+                        <span>Tratar divisão por zero como erro</span>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%; margin-top: 20px;">Criar Função</button>
+        </div>
+
+        <!-- Tela 6: Template Assistant -->
+        <div class="screen">
+            <div class="screen-title">🎯 Assistente de Templates</div>
+
+            <div class="section">
+                <div class="section-title">Templates Rápidos</div>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <div class="function-type-icon icon-variable">📝</div>
+                        <div style="flex: 1;">
+                            <div style="font-size: 14px; font-weight: 500;">Validação de Idade</div>
+                            <div style="font-size: 12px; color: #a0a0a0;">Cria variável condicional para maioridade</div>
+                        </div>
+                        <button class="btn btn-secondary">Usar</button>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <div class="function-type-icon icon-database">💾</div>
+                        <div style="flex: 1;">
+                            <div style="font-size: 14px; font-weight: 500;">Log de Auditoria</div>
+                            <div style="font-size: 12px; color: #a0a0a0;">Insere registro de auditoria no banco</div>
+                        </div>
+                        <button class="btn btn-secondary">Usar</button>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <div class="function-type-icon icon-math">🔢</div>
+                        <div style="flex: 1;">
+                            <div style="font-size: 14px; font-weight: 500;">Cálculo de Desconto</div>
+                            <div style="font-size: 12px; color: #a0a0a0;">Calcula percentual de desconto</div>
+                        </div>
+                        <button class="btn btn-secondary">Usar</button>
+                    </div>
+
+                    <div class="checkbox-item">
+                        <div class="function-type-icon icon-http">🌐</div>
+                        <div style="flex: 1;">
+                            <div style="font-size: 14px; font-weight: 500;">Webhook Notification</div>
+                            <div style="font-size: 12px; color: #a0a0a0;">Envia notificação via webhook</div>
+                        </div>
+                        <button class="btn btn-secondary">Usar</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Criar Template Personalizado</div>
+                <div class="form-group">
+                    <label class="form-label">Nome do Template</label>
+                    <input type="text" class="form-input" placeholder="Ex: Validação de CPF" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Descrição</label>
+                    <input type="text" class="form-input" placeholder="Descreva o que este template faz..." />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Categoria</label>
+                    <select class="dropdown">
+                        <option>Validação</option>
+                        <option>Cálculo</option>
+                        <option>Integração</option>
+                        <option>Processamento</option>
+                    </select>
+                </div>
+
+                <button class="btn btn-primary" style="width: 100%;">Criar Template</button>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Flows Sugeridos</div>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <div style="flex: 1
