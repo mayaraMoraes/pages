@@ -56,6 +56,16 @@ header h1 {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    filter: brightness(1.1) saturate(1.2);
 }
 
 .controls {
@@ -80,6 +90,62 @@ header h1 {
     letter-spacing: 0.5px;
 }
 
+/* Ícones dos botões */
+.btn-icon {
+    width: 20px;
+    height: 20px;
+    filter: brightness(0) invert(1); /* Branco para botões coloridos */
+}
+
+.btn-small-icon {
+    width: 16px;
+    height: 16px;
+    filter: brightness(0) saturate(0) invert(0.7); /* Cinza médio */
+}
+
+.header-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 8px;
+    filter: brightness(0) saturate(0) invert(0.9); /* Cinza claro */
+}
+
+/* Fallback para quando as imagens não carregarem */
+.btn-icon:not([src]),
+.btn-small-icon:not([src]),
+.header-icon:not([src]) {
+    display: none;
+}
+
+/* Fallback com emojis quando imagem falhar */
+#runBtn .btn-icon:before { content: "▶️"; }
+#clearBtn .btn-icon:before { content: "🗑️"; }
+#fullscreenBtn .btn-icon:before { content: "🔍"; }
+#downloadBtn .btn-icon:before { content: "💾"; }
+#formatBtn .btn-small-icon:before { content: "🎯"; }
+#refreshBtn .btn-small-icon:before { content: "🔄"; }
+#debugBtn .btn-small-icon:before { content: "🐛"; }
+#openNewTabBtn .btn-small-icon:before { content: "🔗"; }
+
+.btn-icon:before,
+.btn-small-icon:before,
+.header-icon:before {
+    font-size: inherit;
+    display: none;
+}
+
+img.btn-icon:broken,
+img.btn-small-icon:broken,
+img.header-icon:broken {
+    display: none;
+}
+
+img.btn-icon:broken + span:before,
+img.btn-small-icon:broken + span:before,
+img.header-icon:broken + span:before {
+    display: inline;
+}
+
 .btn-primary {
     background: var(--primary-color);
     color: white;
@@ -91,6 +157,10 @@ header h1 {
     box-shadow: 0 4px 12px rgba(79, 70, 229, 0.4);
 }
 
+.btn-primary .btn-icon {
+    filter: brightness(0) invert(1); /* Sempre branco */
+}
+
 .btn-secondary {
     background: var(--secondary-color);
     color: white;
@@ -99,6 +169,10 @@ header h1 {
 .btn-secondary:hover {
     background: #4b5563;
     transform: translateY(-2px);
+}
+
+.btn-secondary .btn-icon {
+    filter: brightness(0) invert(1); /* Sempre branco */
 }
 
 .btn-accent {
@@ -112,6 +186,10 @@ header h1 {
     box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
 }
 
+.btn-accent .btn-icon {
+    filter: brightness(0) invert(1); /* Sempre branco */
+}
+
 .btn-info {
     background: var(--info-color);
     color: white;
@@ -120,6 +198,10 @@ header h1 {
 .btn-info:hover {
     background: #2563eb;
     transform: translateY(-2px);
+}
+
+.btn-info .btn-icon {
+    filter: brightness(0) invert(1); /* Sempre branco */
 }
 
 .btn-small {
@@ -131,11 +213,24 @@ header h1 {
     border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
 }
 
 .btn-small:hover {
     background: var(--border);
     color: var(--text-primary);
+}
+
+.btn-small .btn-small-icon {
+    filter: brightness(0) saturate(0) invert(0.7); /* Cinza consistente */
+    flex-shrink: 0; /* Impede que o ícone seja comprimido */
+    vertical-align: middle;
+}
+
+.btn-small:hover .btn-small-icon {
+    filter: brightness(0) saturate(0) invert(0.9); /* Mais claro no hover */
 }
 
 /* Layout principal */
@@ -175,6 +270,12 @@ header h1 {
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-primary);
+    display: flex;
+    align-items: center;
+}
+
+.panel-header h3 .header-icon {
+    filter: brightness(0) saturate(0) invert(0.9); /* Branco suave */
 }
 
 .panel-controls {
@@ -289,6 +390,12 @@ header h1 {
 .modal-header h3 {
     font-size: 1.25rem;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.modal-header h3 .header-icon {
+    filter: brightness(0) saturate(0) invert(0.9); /* Branco suave */
 }
 
 .close-btn {
@@ -346,6 +453,12 @@ header h1 {
     
     header h1 {
         font-size: 1.5rem;
+        justify-content: center;
+    }
+    
+    .logo-icon {
+        width: 28px;
+        height: 28px;
     }
     
     .controls {

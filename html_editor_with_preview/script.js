@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeEditor();
     initializeEventListeners();
     loadSampleHTML();
+    setupIconFallbacks();
 });
 
 // Inicializar o editor CodeMirror
@@ -396,6 +397,47 @@ function debugPreview() {
     updatePreview();
     
     showNotification('Debug info no console! Verifique F12', 'info');
+}
+
+// Configurar fallbacks para ícones
+function setupIconFallbacks() {
+    const iconMappings = {
+        'icons/play.png': '▶️',
+        'icons/trash.png': '🗑️',
+        'icons/fullscreen.png': '🔍',
+        'icons/download.png': '💾',
+        'icons/code.png': '📝',
+        'icons/format.png': '🎯',
+        'icons/globe.png': '🌐',
+        'icons/refresh.png': '🔄',
+        'icons/debug.png': '🐛',
+        'icons/external-link.png': '🔗',
+        'icons/search.png': '🔍',
+        'icons/logo.png': '🎨'
+    };
+
+    // Verificar cada imagem e adicionar fallback
+    document.querySelectorAll('img[src^="icons/"]').forEach(img => {
+        img.onerror = function() {
+            const emoji = iconMappings[this.src.split('/').slice(-2).join('/')];
+            if (emoji) {
+                const span = document.createElement('span');
+                span.textContent = emoji;
+                span.className = this.className.replace('icon', 'emoji');
+                this.parentNode.replaceChild(span, this);
+            }
+        };
+        
+        // Verificar se a imagem existe
+        const testImg = new Image();
+        testImg.onload = function() {
+            // Imagem carregou com sucesso
+        };
+        testImg.onerror = function() {
+            img.onerror();
+        };
+        testImg.src = img.src;
+    });
 }
 
 // Sistema de notificações
