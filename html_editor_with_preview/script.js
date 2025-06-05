@@ -42,6 +42,14 @@ function initializeEditor() {
             updateTimeout = setTimeout(updatePreview, 500);
         }
     });
+    
+    // Listener para erros no iframe
+    window.addEventListener('message', function(event) {
+        if (event.data && event.data.type === 'iframe-error') {
+            console.error('Erro no preview:', event.data.error);
+            showNotification('Erro no HTML: ' + event.data.error, 'error');
+        }
+    });
 
     // Ajustar altura do editor
     editor.setSize(null, '100%');
@@ -187,18 +195,27 @@ function updatePreview() {
     const htmlCode = editor.getValue();
     const previewFrame = document.getElementById('preview');
     
-    // Criar um blob com o HTML
-    const blob = new Blob([htmlCode], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    
-    previewFrame.src = url;
-    
-    // Limpar URL anterior para evitar vazamentos de memória
-    setTimeout(() => {
-        URL.revokeObjectURL(url);
-    }, 1000);
-    
-    showNotification('Preview atualizado!', 'success');
+    try {
+        // Método mais confiável: usar srcdoc ao invés de blob URLs
+        previewFrame.srcdoc = htmlCode;
+        
+        // Fallback para blob URL se srcdoc não funcionar
+        if (!previewFrame.srcdoc) {
+            const blob = new Blob([htmlCode], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            previewFrame.src = url;
+            
+            // Limpar URL anterior para evitar vazamentos de memória
+            setTimeout(() => {
+                URL.revokeObjectURL(url);
+            }, 2000);
+        }
+        
+        showNotification('Preview atualizado!', 'success');
+    } catch (error) {
+        console.error('Erro ao atualizar preview:', error);
+        showNotification('Erro ao atualizar preview', 'error');
+    }
 }
 
 // Limpar editor
@@ -216,17 +233,27 @@ function openFullscreen() {
     const fullscreenFrame = document.getElementById('fullscreenPreview');
     const modal = document.getElementById('fullscreenModal');
     
-    // Criar um blob com o HTML
-    const blob = new Blob([htmlCode], { type: 'text/html' });
-    const url = URL.createObjectURL(blob);
-    
-    fullscreenFrame.src = url;
-    modal.classList.add('active');
-    
-    // Limpar URL anterior
-    setTimeout(() => {
-        URL.revokeObjectURL(url);
-    }, 1000);
+    try {
+        // Método mais confiável: usar srcdoc
+        fullscreenFrame.srcdoc = htmlCode;
+        
+        // Fallback para blob URL se srcdoc não funcionar
+        if (!fullscreenFrame.srcdoc) {
+            const blob = new Blob([htmlCode], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            fullscreenFrame.src = url;
+            
+            // Limpar URL anterior
+            setTimeout(() => {
+                URL.revokeObjectURL(url);
+            }, 2000);
+        }
+        
+        modal.classList.add('active');
+    } catch (error) {
+        console.error('Erro ao abrir tela completa:', error);
+        showNotification('Erro ao abrir tela completa', 'error');
+    }
 }
 
 // Fechar tela completa
